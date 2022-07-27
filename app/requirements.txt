@@ -1,0 +1,8 @@
+sympy==1.8
+
+# The sympy latex parser really isn't ideal, but it requires a very 
+# specific version of the antlr4 runtime to be installed
+# https://github.com/sympy/sympy/issues/17629
+antlr4-python3-runtime==4.7
+
+evaluation-function-utils

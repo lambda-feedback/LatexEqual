@@ -1,3 +1,12 @@
+from sympy.parsing.latex import parse_latex
+from evaluation_function_utils.errors import EvaluationException
+from evaluation_function_utils.client import EvaluationFunctionClient
+
+# Initialise External Evaluation Function Client using credentials stored in
+# .env NOTE: These credentials are already present in the base layer
+client = EvaluationFunctionClient(".env")
+
+
 def evaluation_function(response, answer, params):
     """
     Function used to evaluate a student response.
@@ -22,6 +31,20 @@ def evaluation_function(response, answer, params):
     to output the evaluation response.
     """
 
-    return {
-        "is_correct": True
-    }
+    # Attempt to parse both the response and answer latex strings
+    try:
+        res = parse_latex(response)
+    except (SyntaxError, TypeError) as e:
+        raise EvaluationException("There was an error parsing your response",
+                                  error_repr=repr(e))
+
+    try:
+        ans = parse_latex(answer)
+    except (SyntaxError, TypeError) as e:
+        raise EvaluationException("There was an error in parsing the answer",
+                                  error_repr=repr(e))
+
+    # Convert the SymPy Expr into strings and evaluate using symbolicEqual
+    evaluation = client.invoke("symbolicEqual", str(ans), str(res))
+
+    return evaluation

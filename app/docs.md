@@ -1,29 +1,13 @@
-# -Evaluation Function Name-
-*Brief description of what this evaluation function does*
+# LatexEqual
+This is an experimental evaluation function for comparing two latex strings. For evaluation, it actually calls the `symbolicEqual` function using the experimental EvaluationFunctionClient.
 
 ## Inputs
-*Specific input parameters which can be supplied when the `eval` command is supplied to this function.*
+This function doesn't have any parameters, both `response` and `answer` should be valid LaTeX strings.
 
 ## Outputs
-*Output schema/values for this function*
 
-## Examples
-*List of example inputs and outputs for this function, each under a different sub-heading*
-
-### Simple Evaluation
-
-```python
+```json
 {
-  "example": {
-    "Something": "something"
-  }
-}
-```
-
-```python
-{
-  "example": {
-    "Something": "something"
-  }
+  "is_correct": "<bool>"
 }
 ```
