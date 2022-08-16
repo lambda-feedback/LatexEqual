@@ -45,6 +45,6 @@ def evaluation_function(response, answer, params):
                                   error_repr=repr(e))
 
     # Convert the SymPy Expr into strings and evaluate using symbolicEqual
-    evaluation = client.invoke("symbolicEqual", str(ans), str(res))
+    evaluation = client.invoke("symbolicEqual", str(res), str(ans))
 
     return evaluation
